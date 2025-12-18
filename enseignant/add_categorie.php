@@ -115,6 +115,7 @@ $categories = $stmt->get_result();
         required
     >
 
+    
     <textarea
         name="description"
         placeholder="Description"
