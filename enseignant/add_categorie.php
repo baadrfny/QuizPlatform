@@ -162,7 +162,6 @@ $categories = $stmt->get_result();
             </td>
         </tr>
         <?php endwhile; ?>
-        
     </tbody>
 </table>
 
