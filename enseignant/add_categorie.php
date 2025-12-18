@@ -43,43 +43,59 @@ if (isset($_POST['delete_category'])) {
         die("Invalid CSRF token");
     }
 
-
-
-
     //tranform to int pour eviter attack (sql injection)
     $id = (int) $_POST['id'];
 
-    $stmt = $conn->prepare(
-        "DELETE FROM categories WHERE id = ? AND created_by = ?"
+    // check existence + ownership
+    $check = $conn->prepare(
+        "SELECT id FROM categories WHERE id = ? AND created_by = ?"
     );
-    $stmt->bind_param("ii", $id, $_SESSION['user_id']);
-    $stmt->execute();
+    $check->bind_param("ii", $id, $_SESSION['user_id']);
+    $check->execute();
+    $check->store_result();
+
+    if ($check->num_rows === 1) {
+        $stmt = $conn->prepare(
+            "DELETE FROM categories WHERE id = ? AND created_by = ?"
+        );
+        $stmt->bind_param("ii", $id, $_SESSION['user_id']);
+        $stmt->execute();
+    }
 }
 
 //update
 
-// if (isset($_POST['update_categorie'])) {
-//     if (
-//         !isset($_POST['csrf_token'])||
-//         $_POST['csrf_token'] !== $_SESSION['csrf_token']
-//     ) {
-//         die("Invalid CSRF Token");
-//     }
+if (isset($_POST['update_categorie'])) {
+    if (
+        !isset($_POST['csrf_token'])||
+        $_POST['csrf_token'] !== $_SESSION['csrf_token']
+    ) {
+        die("Invalid CSRF Token");
+    }
 
-//     $id = (int) $_POST['id'];
-//     $nom = trim($_POST['nom']);
-//     $description = trim($_POST['description']);
+    $id = (int) $_POST['id'];
+    $nom = trim($_POST['nom']);
+    $description = trim($_POST['description']);
+    $enseignant_id = $_SESSION['user_id'];
 
+    // check existence + ownership
+    $check = $conn->prepare(
+        "SELECT id FROM categories WHERE id = ? AND created_by = ?"
+    );
+    $check->bind_param("ii", $id, $enseignant_id);
+    $check->execute();
+    $check->store_result();
 
-//     if (!empty($nom)) {
-//         $stmt = $conn->prepare(
-//             "UPDATE categorie SET nom = ? description = ? updated_at = NOW()
-//             WHERE ID = ? AND created_at = ? "
-//         );
-//         $stmt->bind_param("ssii" , $nom,$description,$id,$enseignant_id);
-//         $stmt->execute();
-//     }
-// }
+    if ($check->num_rows === 1 && !empty($nom)) {
+        $stmt = $conn->prepare(
+            "UPDATE categories 
+             SET nom = ?, description = ?, updated_at = NOW()
+             WHERE id = ? AND created_by = ?"
+        );
+        $stmt->bind_param("ssii", $nom, $description, $id, $enseignant_id);
+        $stmt->execute();
+    }
+}
 
 /* READ */
 $stmt = $conn->prepare( 
@@ -115,7 +131,6 @@ $categories = $stmt->get_result();
         required
     >
 
-
     <textarea
         name="description"
         placeholder="Description"
@@ -147,8 +162,10 @@ $categories = $stmt->get_result();
             <td class="p-3"><?= htmlspecialchars($row['nom']) ?></td>
             <td class="p-3"><?= htmlspecialchars($row['description']) ?></td>
             <td class="p-3"><?= $row['created_at'] ?></td>
-            <td class="p-3">
-                <form method="POST" onsubmit="return confirm('Supprimer ?')">
+            <td class="p-3 space-x-3">
+
+                <!-- DELETE -->
+                <form method="POST" class="inline" onsubmit="return confirm('Supprimer ?')">
                     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                     <input type="hidden" name="id" value="<?= $row['id'] ?>">
                     <button
@@ -159,10 +176,50 @@ $categories = $stmt->get_result();
                         Supprimer
                     </button>
                 </form>
+
+                <!-- EDIT -->
+                <form method="POST" class="inline">
+                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                    <input type="hidden" name="nom" value="<?= $row['nom'] ?>">
+                    <input type="hidden" name="description" value="<?= $row['description'] ?>">
+                    <!-- <button
+                        type="submit"
+                        name="update_categorie"
+                        class="text-blue-600 font-semibold"
+                    >
+                        Modifier
+                    </button> -->
+                    <a href="edit_categorie.php?id=<?= $row['id'] ?>" class="text-blue-600 font-semibold">Modifier</a>
+
+                </form>
+
             </td>
         </tr>
         <?php endwhile; ?>
     </tbody>
 </table>
+
+
+
+<script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            const button = event.target.closest('button');
+
+            if (!button || !button.onclick || button.onclick.toString().indexOf('toggleDropdown') === -1) {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            }
+        });
+</script>
+
 </body>
 </html>

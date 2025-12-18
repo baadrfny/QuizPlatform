@@ -270,9 +270,6 @@ require_once "../includes/securite.php";
 
 
     <script>
-        // ==================== DROPDOWN ====================
-
-        // Toggle user dropdown
         function toggleDropdown() {
             const dropdown = document.getElementById('userDropdown');
             dropdown.classList.toggle('hidden');
