@@ -101,6 +101,7 @@ $categories = $stmt->get_result();
 </head>
 <body class="bg-gray-50">
 
+
 <h1 class="text-2xl font-bold mb-6">Gestion des catégories</h1>
 
 <!-- ADD CATEGORY -->
