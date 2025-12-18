@@ -115,7 +115,7 @@ $categories = $stmt->get_result();
         required
     >
 
-    
+
     <textarea
         name="description"
         placeholder="Description"
@@ -162,6 +162,7 @@ $categories = $stmt->get_result();
             </td>
         </tr>
         <?php endwhile; ?>
+        
     </tbody>
 </table>
 
