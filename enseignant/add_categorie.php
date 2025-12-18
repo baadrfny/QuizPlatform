@@ -164,5 +164,6 @@ $categories = $stmt->get_result();
         <?php endwhile; ?>
     </tbody>
 </table>
+
 </body>
 </html>
