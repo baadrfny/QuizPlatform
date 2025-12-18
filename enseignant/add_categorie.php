@@ -94,7 +94,8 @@ $categories = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
+
     <meta charset="UTF-8">
     <title>Categories</title>
     <script src="https://cdn.tailwindcss.com"></script>
