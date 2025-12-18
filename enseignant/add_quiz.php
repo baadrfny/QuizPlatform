@@ -95,6 +95,7 @@ $categories = $cat_stmt->get_result();
             <?php endwhile; ?>
         </select>
 
+        
         <button type="submit" name="add_quiz"
                 class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition">
             Ajouter
