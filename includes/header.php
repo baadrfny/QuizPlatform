@@ -29,6 +29,9 @@
                         <a href="/QuizPlatform/enseignant/add_quiz.php" onclick="showSection('quiz')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             <i class="fas fa-clipboard-list mr-2"></i>Mes Quiz
                         </a>
+                        <a href="/QuizPlatform/enseignant/add_question.php" onclick="showSection('quiz')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            <i class="fas fa-clipboard-list mr-2"></i>Mes Questions
+                        </a>
                         <a href="#results" onclick="showSection('results')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             <i class="fas fa-chart-bar mr-2"></i>Résultats
                         </a>

@@ -2,6 +2,7 @@
 session_start();
 require_once "../config/database.php";
 require_once "../includes/securite.php";
+include __DIR__ . "/../includes/header.php";
 
 /* protection login (ila user makach enseignant raj3o login) */
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'enseignant') {
@@ -60,7 +61,7 @@ $categories = $cat_stmt->get_result();
     <title>Ajouter Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 py-10">
+<body class="bg-gray-50">
 
 <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md mx-auto">
     <h2 class="text-2xl font-bold mb-6 text-center">Ajouter Quiz</h2>
@@ -95,7 +96,6 @@ $categories = $cat_stmt->get_result();
             <?php endwhile; ?>
         </select>
 
-        
         <button type="submit" name="add_quiz"
                 class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition">
             Ajouter
