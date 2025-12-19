@@ -189,8 +189,8 @@ $categories = $stmt->get_result();
                         class="text-blue-600 font-semibold"
                     >
                         Modifier
-                    </button> -->
-                    
+                    </button>-->
+
                     <a href="edit_categorie.php?id=<?= $row['id'] ?>" class="text-blue-600 font-semibold">Modifier</a>
 
                 </form>
