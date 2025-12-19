@@ -139,7 +139,6 @@ $quizzes = $quiz_stmt->get_result();
             <option value="3">C</option>
             <option value="4">D</option>
         </select>
-
         <button type="submit" name="add_question"
             class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition">
             Add
