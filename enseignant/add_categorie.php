@@ -190,6 +190,7 @@ $categories = $stmt->get_result();
                     >
                         Modifier
                     </button> -->
+                    
                     <a href="edit_categorie.php?id=<?= $row['id'] ?>" class="text-blue-600 font-semibold">Modifier</a>
 
                 </form>
