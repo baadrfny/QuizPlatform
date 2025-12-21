@@ -79,7 +79,6 @@ $results = $stmt->get_result();
             <?php endif; ?>
         </div>
     </div>
-
 </body>
 
 </html>
