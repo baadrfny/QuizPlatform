@@ -80,7 +80,6 @@ $results = $stmt->get_result();
         </div>
     </div>
 
-
 </body>
 
 </html>
