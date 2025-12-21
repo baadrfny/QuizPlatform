@@ -3,6 +3,8 @@ session_start();
 require_once "../config/database.php";
 require_once "../includes/securite.php";
 
+
+
 /* Login protection */
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'enseignant') {
     header("Location: ../auth/login.php");
@@ -93,7 +95,10 @@ $quizzes = $quiz_stmt->get_result();
 
 <body class="bg-gray-50">
 
-<div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md mx-auto mt-10">
+    <?php include __DIR__ . "/../includes/header.php"; ?>
+
+<div class="pt-16">
+    <div class="bg-white p-8 rounded-2xl shadow-md w-full max-w-md mx-auto mt-10">
 
     <h2 class="text-2xl font-bold mb-6 text-center">Add Question</h2>
 
@@ -145,6 +150,8 @@ $quizzes = $quiz_stmt->get_result();
         </button>
     </form>
 </div>
+</div>
+
 
 </body>
 </html>

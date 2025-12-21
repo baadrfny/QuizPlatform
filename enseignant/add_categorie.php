@@ -117,7 +117,12 @@ $categories = $stmt->get_result();
 </head>
 <body class="bg-gray-50">
 
-<h1 class="text-2xl font-bold mb-6">Gestion des catégories</h1>
+<div>
+    
+</div>
+
+<div class="p-12 pt-20">
+    <h1 class="text-2xl font-bold mb-6">Gestion des catégories</h1>
 
 <!-- ADD CATEGORY -->
 <form method="POST" class="bg-white p-6 rounded-xl shadow mb-8 space-y-4">
@@ -145,10 +150,15 @@ $categories = $stmt->get_result();
         Ajouter
     </button>
 </form>
+</div>
+
+
 
 <!-- LIST -->
-<table class="w-full bg-white rounded-xl shadow">
-    <thead class="bg-gray-200">
+
+<div class="px-16">
+    <table class="w-full bg-white rounded-xl shadow">
+    <thead class="bg-gray-300">
         <tr>
             <th class="p-3 text-left">Nom</th>
             <th class="p-3 text-left">Description</th>
@@ -156,7 +166,7 @@ $categories = $stmt->get_result();
             <th class="p-3 text-left">Action</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="bg-gray-100">
         <?php while ($row = $categories->fetch_assoc()) : ?>
         <tr class="border-t">
             <td class="p-3"><?= htmlspecialchars($row['nom']) ?></td>
@@ -199,6 +209,8 @@ $categories = $stmt->get_result();
         <?php endwhile; ?>
     </tbody>
 </table>
+
+</div>
 
 
 

@@ -20,7 +20,7 @@
                         <span class="ml-3 px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Enseignant</span>
                     </div>
                     <div class="hidden md:ml-10 md:flex md:space-x-8">
-                        <a href="#dashboard" onclick="showSection('dashboard')" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/enseignant/dashboard.php" onclick="showSection('dashboard')" class="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             <i class="fas fa-home mr-2"></i>Tableau de bord
                         </a>
                         <a href="/QuizPlatform/enseignant/add_categorie.php" onclick="showSection('categories')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
@@ -29,10 +29,10 @@
                         <a href="/QuizPlatform/enseignant/add_quiz.php" onclick="showSection('quiz')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             <i class="fas fa-clipboard-list mr-2"></i>Mes Quiz
                         </a>
-                        <a href="/QuizPlatform/enseignant/add_question.php" onclick="showSection('quiz')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            <i class="fas fa-clipboard-list mr-2"></i>Mes Questions
+                        <!-- <a href="/QuizPlatform/enseignant/add_question.php" onclick="showSection('quiz')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            <i class="fas fa-clipboard-list mr-2"></i>Mes Questions -->
                         </a>
-                        <a href="#results" onclick="showSection('results')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <a href="/QuizPlatform/enseignant/view_results.php" onclick="showSection('results')" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                             <i class="fas fa-chart-bar mr-2"></i>Résultats
                         </a>
                     </div>
