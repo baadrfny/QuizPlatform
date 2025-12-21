@@ -17,7 +17,7 @@ $stmt = $conn->prepare(
         r.completed_at,
         u.nom AS etudiant_nom,
         q.titre AS quiz_titre
-     FROM results r
+     FROM results r 
      JOIN users u ON u.id = r.etudiant_id
      JOIN quizzes q ON q.id = r.quiz_id
      WHERE q.enseignant_id = ?
