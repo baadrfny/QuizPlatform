@@ -76,7 +76,6 @@ $results = $stmt->get_result();
                         </tbody>
                     </table>
                 </div>
-
             <?php endif; ?>
         </div>
     </div>
