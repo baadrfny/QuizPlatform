@@ -34,31 +34,36 @@ if (isset($_POST['add_category'])) {
 }
 
 /* DELETE */
+/* DELETE */
 if (isset($_POST['delete_category'])) {
 
-    if (
-        !isset($_POST['csrf_token']) ||
-        $_POST['csrf_token'] !== $_SESSION['csrf_token']
-    ) {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         die("Invalid CSRF token");
     }
 
-    //tranform to int pour eviter attack (sql injection)
     $id = (int) $_POST['id'];
+    $user_id = $_SESSION['user_id'];
 
-    // check existence + ownership
-    $check = $conn->prepare(
-        "SELECT id FROM categories WHERE id = ? AND created_by = ?"
-    );
-    $check->bind_param("ii", $id, $_SESSION['user_id']);
+    $check = $conn->prepare("SELECT id FROM categories WHERE id = ? AND created_by = ?");
+    $check->bind_param("ii", $id, $user_id);
     $check->execute();
     $check->store_result();
 
     if ($check->num_rows === 1) {
-        $stmt = $conn->prepare(
-            "DELETE FROM categories WHERE id = ? AND created_by = ?"
-        );
-        $stmt->bind_param("ii", $id, $_SESSION['user_id']);
+        
+        $del_questions = $conn->prepare("
+            DELETE FROM questions 
+            WHERE quiz_id IN (SELECT id FROM quizzes WHERE categorie_id = ?)
+        ");
+        $del_questions->bind_param("i", $id);
+        $del_questions->execute();
+
+        $del_quizzes = $conn->prepare("DELETE FROM quizzes WHERE categorie_id = ? AND enseignant_id = ?");
+        $del_quizzes->bind_param("ii", $id, $user_id);
+        $del_quizzes->execute();
+
+        $stmt = $conn->prepare("DELETE FROM categories WHERE id = ? AND created_by = ?");
+        $stmt->bind_param("ii", $id, $user_id);
         $stmt->execute();
     }
 }
@@ -230,6 +235,25 @@ $categories = $stmt->get_result();
                 }
             }
         });
+
+        
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            const button = event.target.closest('button');
+
+            if (!button || !button.onclick || button.onclick.toString().indexOf('toggleDropdown') === -1) {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            }
+        });
+    
 </script>
 
 </body>

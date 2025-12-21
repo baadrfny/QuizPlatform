@@ -2,6 +2,7 @@
 session_start();
 require_once "../config/database.php";
 require_once "../includes/securite.php";
+include __DIR__ . "/../includes/header.php";
 
 /* --- PROTECTION AUTHENTIFICATION --- */
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'enseignant') {
@@ -84,9 +85,10 @@ $result = $quizzes_list->get_result();
     <title>Gestion des Quiz</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 p-6">
+<body class="bg-gray-50">
 
-<div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="p-28">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
     
     <div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg h-fit border-t-4 border-indigo-600">
         <h2 class="text-xl font-bold mb-6">Créer un Quiz</h2>
@@ -165,6 +167,8 @@ $result = $quizzes_list->get_result();
         </div>
     </div>
 </div>
+</div>
+
 
 <script>
 let qIndex = 0;
@@ -191,6 +195,25 @@ function addQuestion() {
     container.insertAdjacentHTML('beforeend', html);
     qIndex++;
 }
+
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('userDropdown');
+            const button = event.target.closest('button');
+
+            if (!button || !button.onclick || button.onclick.toString().indexOf('toggleDropdown') === -1) {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            }
+        });
+    
 </script>
 
 </body>
