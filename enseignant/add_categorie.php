@@ -135,7 +135,6 @@ $categories = $stmt->get_result();
         class="w-full border p-3 rounded"
         required
     >
-
     <textarea
         name="description"
         placeholder="Description"
