@@ -51,7 +51,6 @@ $results = $stmt->get_result();
                 <div class="overflow-x-auto">
                     <table class="w-full border-collapse">
                         <thead>
-                            
                             <tr class="bg-gray-200 text-left">
                                 <th class="p-3 border">Student</th>
                                 <th class="p-3 border">Quiz</th>
